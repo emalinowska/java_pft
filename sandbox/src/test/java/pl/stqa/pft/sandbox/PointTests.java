@@ -8,17 +8,17 @@ public class PointTests {
   @Test
   public void testDistance() {
 
-    Point point1 = new Point (0, -1);
-    Point point2 = new Point (0,2);
+    Point point1 = new Point(0, -1);
+    Point point2 = new Point(0, 2);
     Assert.assertEquals(Point.distance(point1, point2), 3.0);
   }
 
   @Test
   public void testDistanceFailed() {
 
-    Point point1 = new Point (2,2);
-    Point point2 = new Point (4,7);
-    Assert.assertEquals(Point.distance(point1, point2), 4 );
+    Point point1 = new Point(2, 2);
+    Point point2 = new Point(4, 7);
+    Assert.assertEquals(Point.distance(point1, point2), 4);
 
   }
 }
