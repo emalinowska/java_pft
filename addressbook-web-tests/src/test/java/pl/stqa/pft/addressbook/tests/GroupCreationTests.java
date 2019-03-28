@@ -1,10 +1,10 @@
 package pl.stqa.pft.addressbook.tests;
 
 
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import pl.stqa.pft.addressbook.model.GroupData;
 
-public class GroupCreationTests extends TestBase{
+public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() throws Exception {

@@ -3,14 +3,13 @@ package pl.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper {
-  private WebDriver wd;
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(WebDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.name("new")).click();
+    click(By.className("admin"));
   }
 }
