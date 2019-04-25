@@ -3,29 +3,41 @@ package pl.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private final String firstName;
-  private final String lastName;
-  private final String mobile;
-  private final String email;
+  private int id = Integer.MAX_VALUE;
+  private String firstName;
+  private String lastName;
+  private String mobile;
+  private String email;
   private String group;
 
-  public ContactData(String firstName, String lastName, String mobile, String email, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.mobile = mobile;
-    this.email = email;
-    this.group = group;
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
   }
 
-  public ContactData(Integer id, String firstName, String lastName, String mobile, String email, String group) {
-    this.id = id;
+  public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withMobile(String mobile) {
     this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withEmail(String email) {
     this.email = email;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
     this.group = group;
+    return this;
   }
 
   @Override
