@@ -50,6 +50,7 @@ public class ContactData {
     this.homePhone = homePhone;
     return this;
   }
+
   public String getMobilePhone() {
     return mobilePhone;
   }
@@ -58,28 +59,35 @@ public class ContactData {
     this.mobilePhone = mobilePhone;
     return this;
   }
+
   public String getWorkPhone() {
     return workPhone;
   }
+
   public ContactData withWorkPhone(String workPhone) {
     this.workPhone = workPhone;
     return this;
   }
+
   public int getId() {
     return id;
   }
+
   public ContactData withId(int id) {
     this.id = id;
     return this;
   }
+
   public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
+
   public ContactData withLastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
+
   public ContactData withEmail(String email) {
     this.email = email;
     return this;
@@ -99,12 +107,15 @@ public class ContactData {
     this.group = group;
     return this;
   }
+
   public String getFirstName() {
     return firstName;
   }
+
   public String getLastName() {
     return lastName;
   }
+
   public String getEmail() {
     return email;
   }
@@ -120,6 +131,7 @@ public class ContactData {
   public String getGroup() {
     return group;
   }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -128,6 +140,7 @@ public class ContactData {
       ", lastName='" + lastName + '\'' +
       '}';
   }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -137,6 +150,7 @@ public class ContactData {
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
     return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
   }
+
   @Override
   public int hashCode() {
     int result = id;
