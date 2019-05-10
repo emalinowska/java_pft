@@ -8,7 +8,9 @@ import org.testng.Assert;
 import pl.stqa.pft.addressbook.model.ContactData;
 import pl.stqa.pft.addressbook.model.Contacts;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase {
 
@@ -43,10 +45,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"), contactData.getWorkPhone());
 
     if (creation) {
-      if (!contactData.getGroup().isEmpty()) {
-        Select groupSelect = new Select(wd.findElement(By.name("new_group")));
-        groupSelect.selectByVisibleText(contactData.getGroup());
-      }
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -124,8 +123,9 @@ public class ContactHelper extends HelperBase {
       String firstName = cells.get(2).getText();
       String allPhones = cells.get(5).getText();
       String allEmails = cells.get(4).getText();
+      String allDetails = Arrays.asList(firstName, lastName, allPhones, allEmails).stream().collect(Collectors.joining("\n"));
       contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-        .withAllPhones(allPhones).withAllEmails(allEmails));
+        .withAllPhones(allPhones).withAllEmails(allEmails).withAllDetails(allDetails));
     }
 
     return new Contacts(contactCache);
@@ -153,5 +153,17 @@ public class ContactHelper extends HelperBase {
       .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).
         withEmail(email).withEmail2(email2).withEmail3(email3);
   }
+
+  public String infoFromDetailsForm(ContactData contact) {
+    initDetailsById(contact.getId());
+    String allDetails = wd.findElement(By.id("content")).getText();
+
+    return allDetails;
+  }
+
+  private void initDetailsById(int id) {
+    click(By.cssSelector("a[href*='view.php?id=" + id + "']"));
+  }
+
 }
 
