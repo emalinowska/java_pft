@@ -17,6 +17,9 @@ import java.util.List;
 
 public class GroupDataGenerator {
 
+  //C:\java_pft\addressbook-web-tests\src\test\resources
+  //-f src/test/resources/groups.json -c 3 -d json
+
   @Parameter(names = "-c", description = "Group count")
   public int count;
 
@@ -63,8 +66,8 @@ public class GroupDataGenerator {
     List<GroupData> groups = new ArrayList<GroupData>();
     for (int i = 0; i < count; i++) {
       groups.add(new GroupData().
-        withName(String.format("test %s", i)).withHeader(String.format("header\n%s", i)).
-        withFooter(String.format("footer\n%s", i)));
+        withName(String.format("test %s", i)).
+        withHeader(String.format("header %s", i)).withFooter(String.format("footer %s", i)));
     }
     return groups;
   }

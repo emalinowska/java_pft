@@ -7,6 +7,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.Objects;
 
 @Entity
 @Table(name = "addressbook")
@@ -67,14 +68,19 @@ public class ContactData {
 
   @Column(name = "photo")
   @Type(type = "text")
+  @Transient
   private String photo;
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo != null)
+      return new File(photo);
+    return null;
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo.getPath();
+    if (photo != null) {
+      this.photo = photo.getPath();
+    }
     return this;
   }
 
@@ -191,6 +197,32 @@ public class ContactData {
     return email3;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+      Objects.equals(firstName, that.firstName) &&
+      Objects.equals(lastName, that.lastName) &&
+      Objects.equals(homePhone, that.homePhone) &&
+      Objects.equals(mobilePhone, that.mobilePhone) &&
+      Objects.equals(workPhone, that.workPhone) &&
+      Objects.equals(allPhones, that.allPhones) &&
+      Objects.equals(email, that.email) &&
+      Objects.equals(email2, that.email2) &&
+      Objects.equals(email3, that.email3) &&
+      Objects.equals(allEmails, that.allEmails) &&
+      Objects.equals(allDetails, that.allDetails) &&
+      Objects.equals(photo, that.photo);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, lastName, homePhone, mobilePhone, workPhone, allPhones,
+      email, email2, email3, allEmails, allDetails, photo);
+  }
+
   public String getGroup() {
     return group;
   }
@@ -198,27 +230,20 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-      "id='" + id + '\'' +
+      "id=" + id +
       ", firstName='" + firstName + '\'' +
       ", lastName='" + lastName + '\'' +
+      ", homePhone='" + homePhone + '\'' +
+      ", mobilePhone='" + mobilePhone + '\'' +
+      ", workPhone='" + workPhone + '\'' +
+      ", allPhones='" + allPhones + '\'' +
+      ", email='" + email + '\'' +
+      ", email2='" + email2 + '\'' +
+      ", email3='" + email3 + '\'' +
+      ", allEmails='" + allEmails + '\'' +
+      ", allDetails='" + allDetails + '\'' +
+      ", photo='" + photo + '\'' +
       '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    if (id != that.id) return false;
-    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    return result;
-  }
 }

@@ -34,6 +34,13 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
+  @Override
+  public String toString() {
+    return "ContactHelper{" +
+      "contactCache=" + contactCache +
+      '}';
+  }
+
   public void fillNewContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
